@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Store = React.createContext();
+
+export function Parent(props) {
+  const data = {
+    msg: "Hello!"
+  };
+
+  return <Store.Provider value={data}>{props.children}</Store.Provider>;
 }
 
-export default App;
+export function Child() {
+  const data = useContext(Store);
+
+  return <h1>{data.msg}</h1>;
+}
